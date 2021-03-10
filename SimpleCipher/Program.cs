@@ -9,10 +9,14 @@ namespace SimpleCipher
         {
             Console.Write("Text:");
             string text = Console.ReadLine();
-            
-            string cipherAlphabet = "yhkqgvxfoluapwmtzecjdbsnri";
 
-            Console.Write("Choose(encipher/decipher):");
+            Console.Write("KeyWord:");
+            string word = Console.ReadLine();
+            string cipherAlphabet = keyWithWord(word);
+
+            Console.WriteLine(cipherAlphabet);
+
+           Console.Write("Choose(encipher/decipher):");
             string choose = Console.ReadLine();
 
             switch (choose)
@@ -74,6 +78,33 @@ namespace SimpleCipher
         {
            
             return Cipher(input, cipherAlphabet, plainAlphabet);
+        }
+
+        public static string keyWithWord(string word)
+        {
+            string key = word;
+            bool check = false;
+            for (int i = 0; i < plainAlphabet.Length; i++)
+            {
+                check = false;
+                for (int j = 0; j < word.Length; j++)
+                {
+                    if (plainAlphabet[i] == word[j])
+                    {
+                        check = true;
+                        
+                    }
+                    
+
+                }
+                if (check == false)
+                {
+                    key += plainAlphabet[i];
+                    check = false;
+                }
+                
+            }
+            return key;
         }
     }
 
