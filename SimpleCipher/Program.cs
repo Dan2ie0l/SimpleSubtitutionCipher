@@ -4,7 +4,7 @@ namespace SimpleCipher
 {
     class Program
     {
-        public static string  plainAlphabet = "abcdefghijklmnopqrstuvwxyz";
+        public static string plainAlphabet = "abcdefghijklmnopqrstuvwxyz";
         static void Main(string[] args)
         {
             Console.Write("Text:");
@@ -16,13 +16,13 @@ namespace SimpleCipher
 
             Console.WriteLine(cipherAlphabet);
 
-           Console.Write("Choose(encipher/decipher):");
+            Console.Write("Choose(encipher/decipher):");
             string choose = Console.ReadLine();
 
             switch (choose)
             {
                 case "encipher":
-                    Console.WriteLine(Encipher(text, cipherAlphabet) ); 
+                    Console.WriteLine(Encipher(text, cipherAlphabet));
                     break;
 
                 case "decipher":
@@ -41,8 +41,8 @@ namespace SimpleCipher
                     break;
             }
 
-          
-           
+
+
 
         }
 
@@ -70,20 +70,27 @@ namespace SimpleCipher
 
         public static string Encipher(string input, string cipherAlphabet)
         {
-           
+
             return Cipher(input, plainAlphabet, cipherAlphabet);
         }
 
         public static string Decipher(string input, string cipherAlphabet)
         {
-           
+
             return Cipher(input, cipherAlphabet, plainAlphabet);
         }
 
         public static string keyWithWord(string word)
         {
-            string key = word;
+            string key = string.Empty;
             bool check = false;
+            for (int i = 0; i < word.Length; i++)
+            {
+                if ((!key.Contains(word[i])) && (word[i] != ' '))
+                {
+                    key += word[i];
+                }
+            }
             for (int i = 0; i < plainAlphabet.Length; i++)
             {
                 check = false;
@@ -92,9 +99,9 @@ namespace SimpleCipher
                     if (plainAlphabet[i] == word[j])
                     {
                         check = true;
-                        
+
                     }
-                    
+
 
                 }
                 if (check == false)
@@ -102,7 +109,7 @@ namespace SimpleCipher
                     key += plainAlphabet[i];
                     check = false;
                 }
-                
+
             }
             return key;
         }
